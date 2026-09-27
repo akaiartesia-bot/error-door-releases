@@ -1,0 +1,6 @@
+*.pem
+*.key
+.env
+*.red
+*分发记录*.json
+*错误的门记录*.json
