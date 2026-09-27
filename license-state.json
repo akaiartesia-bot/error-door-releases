@@ -1,0 +1,8 @@
+{
+  "format": "ERROR-DOOR-AUTH-STATE-1",
+  "revision": 1,
+  "issued_at": "2026-09-27T10:23:14+00:00",
+  "revoked_license_ids": [],
+  "revoked_machine_hashes": [],
+  "signature": "Yd3GBLwIXO30o3ISACUx__tjeNKT7B0w7evilXZ08MyzX4cix7p2v0uj7JMClP0mf9QpMNy7YpLKStdfgifau7HotznkH7w8SD4mtMi9p_AlLw8fn_Z1Z9yF5J3Rf5_z2awgiXLj0kCuj26mMXjOeTEqR5s-wLw8s2hv7QjXzy0FBMRSftVh1c3mb8jL1UCqa9jsDdgLtrsUdu_XIJ2j0KhbGiqK3BaGEmeny_ythLi7JzduSiTunkZZ1edYo40sISg1Wp-Pv4y2_8hKRTHnjpYv6EZm8m6u1Lc7lOjeoKXUBkeKC8B9htJZMy88uSzPTGUaQRzgy4ok3ZUGpKF6-A"
+}
