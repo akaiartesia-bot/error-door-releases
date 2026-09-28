@@ -3,15 +3,95 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="错误的门：RED 文件打标、分发与来源核验工具。">
-  <meta name="theme-color" content="#f2f3f0">
-  <title>错误的门 · RED 文件打标与来源核验</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2324292a'/%3E%3Cpath d='M17 11h31v42H17z' fill='%23f2f3f0'/%3E%3Cpath d='M22 16h20v32H22z' fill='%23952f32'/%3E%3Ccircle cx='38' cy='32' r='2' fill='%23f2f3f0'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="/assets/site.css">
-  <script type="module" src="/assets/site.js"></script>
+  <meta name="description" content="错误的门官方下载与软件授权">
+  <title>错误的门 · 官方网站</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%231c1c1e'/%3E%3Cpath d='M18 12h30v40H18z' fill='%23fff'/%3E%3Cpath d='M23 17h20v30H23z' fill='%23c8323a'/%3E%3Ccircle cx='39' cy='32' r='2' fill='%23fff'/%3E%3C/svg%3E">
+  <style>
+    :root{color-scheme:light;--ink:#1c1c1e;--muted:#77777e;--paper:#fff;--soft:#f2f2f7;--line:#dedee5;--red:#be3038;--red2:#d94b52;--green:#287a53}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;background:linear-gradient(155deg,#f7f7fa 0,#ececf2 55%,#f7eef0 100%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC",sans-serif;padding:calc(32px + env(safe-area-inset-top)) 18px calc(30px + env(safe-area-inset-bottom))}
+    button,input{font:inherit}
+    main{width:min(100%,620px);margin:auto}
+    .brand{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}.brand-main{display:flex;align-items:center;gap:13px}.icon{width:52px;height:52px;border-radius:15px;background:#1c1c1e;position:relative;box-shadow:0 10px 24px #1c1c1e22;flex:0 0 auto}.icon:before{content:"";position:absolute;inset:10px 12px;background:#fff;border-radius:2px}.icon:after{content:"";position:absolute;inset:15px 18px;background:var(--red);border-radius:1px}.brand h1{font-size:1.3rem;margin:0}.brand p{font-size:.82rem;color:var(--muted);margin:4px 0 0}.nav{display:flex;gap:6px}.nav a{color:var(--muted);text-decoration:none;font-size:.8rem;font-weight:700;background:#ffffff99;padding:8px 11px;border-radius:999px}.nav a:hover{color:var(--ink);background:#fff}
+    .card{background:rgba(255,255,255,.94);border:1px solid #ffffff;border-radius:24px;padding:24px;box-shadow:0 18px 45px #30303b12}.card+.card{margin-top:16px}.version{display:inline-flex;background:#f5e8e9;color:var(--red);font-size:.78rem;font-weight:750;border-radius:999px;padding:7px 11px}.card h2{font-size:1.55rem;margin:16px 0 9px}.card>p,.hint{color:var(--muted);line-height:1.7;margin:0}.notes{margin:22px 0;padding:16px;border-radius:16px;background:var(--soft);line-height:1.65;font-size:.9rem}.buttons{display:grid;gap:11px}.button{border:0;width:100%;display:flex;align-items:center;justify-content:space-between;text-decoration:none;color:#fff;background:linear-gradient(180deg,var(--red2),var(--red));border-radius:16px;padding:16px 18px;font-weight:750;box-shadow:0 9px 22px #be303829;cursor:pointer;text-align:left}.button:hover{filter:brightness(.98)}.button:active{transform:translateY(1px)}.button.secondary{color:var(--ink);background:#ebebf0;box-shadow:none}.button small{font-weight:500;opacity:.72}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:20px 0}.step{background:var(--soft);border-radius:15px;padding:13px 12px;color:var(--muted);font-size:.78rem;line-height:1.5}.step b{display:block;color:var(--ink);font-size:.84rem;margin-bottom:3px}.step i{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;font-style:normal;background:#fff;color:var(--red);margin-bottom:8px;font-weight:800}
+    .field{margin:18px 0 12px}.field label{display:block;font-weight:750;font-size:.88rem;margin-bottom:8px}.field input{width:100%;border:1px solid var(--line);background:var(--soft);border-radius:14px;padding:14px 15px;color:var(--ink);outline:0;font-family:"SF Mono","Menlo","Consolas",monospace;font-size:.9rem}.field input:focus{border-color:var(--red);box-shadow:0 0 0 3px #be303818}.privacy{display:flex;gap:8px;align-items:flex-start;color:var(--muted);font-size:.76rem;line-height:1.55;margin:0 0 16px}.privacy:before{content:"✓";color:var(--green);font-weight:900}.status{min-height:20px;color:var(--green);font-size:.8rem;margin-top:10px}.foot{text-align:center;color:var(--muted);font-size:.76rem;line-height:1.6;margin-top:18px}
+    @media(max-width:520px){body{padding-left:12px;padding-right:12px}.brand{align-items:flex-start}.nav{display:none}.card{padding:20px}.button{align-items:flex-start;flex-direction:column;gap:3px}.steps{grid-template-columns:1fr}.step{display:grid;grid-template-columns:28px 1fr;column-gap:7px}.step i{grid-row:1 / span 2}.step b{margin:0}}
+  </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">跳到正文</a>
-  <div id="app"><p class="loading" role="status">正在读取正式发布信息…</p></div>
+  <main>
+    <header class="brand">
+      <div class="brand-main"><div class="icon" aria-hidden="true"></div><div><h1>错误的门</h1><p>制作人@uyu · 官方网站</p></div></div>
+      <nav class="nav" aria-label="页面导航"><a href="#download">下载</a><a href="#license">授权</a></nav>
+    </header>
+
+    <section class="card" id="download">
+      <span class="version">最新版本 5.15.2</span>
+      <h2>下载最新版</h2>
+      <p>选择对应系统下载。macOS 解压后把 App 拖入“应用程序”；Windows 解压后直接打开 EXE。</p>
+      <div class="notes">5.15.2 继续使用 GitHub 自动更新；自动更新失败时，可直接跳转官网手动下载。</div>
+      <div class="buttons">
+        <a class="button" href="https://github.com/akaiartesia-bot/error-door-releases/releases/download/v5.15.2/error-door-v5.15.2-macOS-x64.zip"><span>下载 macOS 独立版</span><small>Intel 64 位 · Apple 芯片需 Rosetta · 官网直链</small></a>
+        <a class="button secondary" href="https://github.com/akaiartesia-bot/error-door-releases/releases/download/v5.15.2/error-door-v5.15.2-windows-x64.zip"><span>下载 Windows 免安装版</span><small>Windows 10 / 11 · 64 位 · 官网直链</small></a>
+      </div>
+    </section>
+
+    <section class="card" id="license">
+      <span class="version">软件授权</span>
+      <h2>购买授权</h2>
+      <p>把本机机器码和想购买的期限发给制作人@uyu。确认后会收到仅适用于这台电脑的授权码。</p>
+      <div class="steps" aria-label="授权步骤">
+        <div class="step"><i>1</i><b>复制机器码</b><span>从软件授权窗口进入本页时会自动填入。</span></div>
+        <div class="step"><i>2</i><b>发送购买信息</b><span>复制下方文字并发给制作人@uyu。</span></div>
+        <div class="step"><i>3</i><b>输入授权码</b><span>回到软件粘贴授权码，验证后即可使用。</span></div>
+      </div>
+      <div class="field">
+        <label for="machine">本机机器码</label>
+        <input id="machine" name="machine" autocomplete="off" spellcheck="false" placeholder="例如 EDR-AAAA-BBBB-CCCC-DDDD-EEEE" maxlength="64">
+      </div>
+      <p class="privacy">本页不会提交、保存或上传机器码；购买信息只在当前浏览器中生成。</p>
+      <button class="button" id="copyPurchase" type="button"><span>复制购买信息</span><small>复制后发送给制作人@uyu</small></button>
+      <div class="status" id="copyStatus" role="status" aria-live="polite"></div>
+    </section>
+
+    <p class="foot">Windows 首次打开可能出现“未知发布者”提示。授权与核验在本机完成，不上传 RED、机器码、QQ、邮箱配置、SMTP 授权码或邮件正文。</p>
+  </main>
+  <script>
+    (() => {
+      const params = new URLSearchParams(location.search);
+      const machine = document.querySelector('#machine');
+      const status = document.querySelector('#copyStatus');
+      const supplied = (params.get('machine') || '').trim();
+      if (/^EDR-[A-Z0-9-]{10,40}$/i.test(supplied)) machine.value = supplied.toUpperCase();
+      const platform = (params.get('platform') || '未填写').slice(0, 32);
+      const version = (params.get('version') || '未填写').slice(0, 16);
+      const fallbackCopy = text => {
+        const area = document.createElement('textarea');
+        area.value = text; area.style.position = 'fixed'; area.style.opacity = '0';
+        document.body.appendChild(area); area.select();
+        const ok = document.execCommand('copy'); area.remove();
+        if (!ok) throw new Error('copy failed');
+      };
+      document.querySelector('#copyPurchase').addEventListener('click', async () => {
+        const code = machine.value.trim().toUpperCase();
+        if (!/^EDR-[A-Z0-9-]{10,40}$/.test(code)) {
+          status.textContent = '请先填写软件授权窗口中显示的完整机器码。';
+          status.style.color = 'var(--red)'; machine.focus(); return;
+        }
+        const text = `你好，我想购买“错误的门”软件授权。\n机器码：${code}\n系统：${platform}\n软件版本：${version}\n授权期限：请告知可选方案。`;
+        try {
+          if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
+          else fallbackCopy(text);
+          status.textContent = '购买信息已复制，可以发给制作人@uyu了。';
+          status.style.color = 'var(--green)';
+        } catch (_) {
+          status.textContent = '浏览器未允许自动复制，请长按机器码复制后发送。';
+          status.style.color = 'var(--red)';
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
