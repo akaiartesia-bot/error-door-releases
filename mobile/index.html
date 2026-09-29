@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f1f1f3">
+  <meta name="description" content="错误的门手机伴侣：本地核验 RED、查询打标历史与授权状态。">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="错误的门">
+  <title>错误的门 · 手机伴侣</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <link rel="stylesheet" href="./app.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../" aria-label="返回错误的门官网">
+      <span class="brand-icon" aria-hidden="true"></span>
+      <span><strong>错误的门</strong><small>手机伴侣</small></span>
+    </a>
+    <span class="connection" id="connection"><i></i><span>本机处理</span></span>
+  </header>
+
+  <main class="shell">
+    <section class="view active" data-view="home" aria-labelledby="home-title">
+      <div class="hero">
+        <p class="eyebrow">MOBILE COMPANION</p>
+        <h1 id="home-title">把核验带在身边。</h1>
+        <p>不上传 RED，不保存核验密钥。适合临时查标、核对分发历史和确认授权状态。</p>
+      </div>
+
+      <div class="quick-grid">
+        <button class="quick primary" type="button" data-go="verify"><span class="quick-index">01</span><strong>核验 RED</strong><small>读取图片水印与来源</small></button>
+        <button class="quick" type="button" data-go="history"><span class="quick-index">02</span><strong>查询历史</strong><small>QQ ＋核验密钥</small></button>
+      </div>
+
+      <section class="panel compact" aria-labelledby="local-summary-title">
+        <div class="panel-head"><div><p class="eyebrow">LOCAL DATA</p><h2 id="local-summary-title">本机资料</h2></div><button class="text-action" type="button" data-open-records>导入记录</button></div>
+        <dl class="summary-list">
+          <div><dt>分发记录</dt><dd id="recordBundleCount">0 份</dd></div>
+          <div><dt>可查询条目</dt><dd id="recordItemCount">0 条</dd></div>
+          <div><dt>授权码</dt><dd>不会保存</dd></div>
+        </dl>
+      </section>
+
+      <section class="install-callout" id="installCallout">
+        <div><strong>添加到手机桌面</strong><p id="installHint">可像普通 App 一样从桌面打开。</p></div>
+        <button id="installButton" type="button">安装</button>
+      </section>
+    </section>
+
+    <section class="view" data-view="verify" aria-labelledby="verify-title" hidden>
+      <div class="page-title"><p class="eyebrow">SOURCE VERIFY</p><h1 id="verify-title">来源核验</h1><p>读取 RED 内所有兼容图片。导入对应分发记录后，可把匿名标识还原为顾客 QQ。</p></div>
+
+      <section class="panel">
+        <label class="file-picker" id="redPicker">
+          <input id="redInput" type="file" accept=".red" hidden>
+          <span class="file-plus">＋</span>
+          <span><strong>选择一个 RED 文件</strong><small>加密与未加密格式均可核验</small></span>
+        </label>
+        <div class="selected-file" id="selectedRed" hidden></div>
+        <div class="inline-actions">
+          <button class="secondary" type="button" data-open-records>导入分发记录</button>
+          <span id="verifyRecordHint">未导入记录</span>
+        </div>
+        <button class="main-action" id="verifyButton" type="button" disabled>开始核验</button>
+        <div class="progress" id="verifyProgress" hidden><i></i></div>
+        <div class="notice" id="verifyNotice" role="status" aria-live="polite" hidden></div>
+      </section>
+      <div class="result-stack" id="verifyResults"></div>
+    </section>
+
+    <section class="view" data-view="history" aria-labelledby="history-title" hidden>
+      <div class="page-title"><p class="eyebrow">DISTRIBUTION HISTORY</p><h1 id="history-title">打标历史</h1><p>只查询导入到这台手机的分发记录；核验密钥仅在本次计算中使用。</p></div>
+
+      <section class="panel">
+        <div class="panel-head"><div><h2>分发记录</h2><p id="historyRecordHint">尚未导入</p></div><button class="text-action" type="button" data-open-records>导入</button></div>
+        <label class="retain-row"><input id="retainRecords" type="checkbox"><span><strong>保留在这台手机</strong><small>关闭时刷新页面后消失</small></span></label>
+        <div class="field-grid">
+          <label class="field"><span>顾客 QQ</span><input id="historyQQ" inputmode="numeric" autocomplete="off" placeholder="5–12 位数字" maxlength="12"></label>
+          <label class="field"><span>核验密钥</span><input id="historyKey" type="password" autocomplete="off" placeholder="至少 10 个字符"></label>
+        </div>
+        <button class="main-action" id="historyButton" type="button">查询打标历史</button>
+        <div class="notice" id="historyNotice" role="status" aria-live="polite" hidden></div>
+      </section>
+      <div class="result-stack" id="historyResults"></div>
+    </section>
+
+    <section class="view" data-view="license" aria-labelledby="license-title" hidden>
+      <div class="page-title"><p class="eyebrow">LICENSE STATUS</p><h1 id="license-title">授权状态</h1><p>在手机本地核验授权签名，并读取官网公开的停用名单。授权码不会保存或提交。</p></div>
+
+      <section class="panel">
+        <label class="field"><span>桌面端机器码</span><input id="machineCode" autocomplete="off" spellcheck="false" placeholder="EDR-AAAA-BBBB-CCCC-DDDD-EEEE"></label>
+        <label class="field"><span>完整授权码</span><textarea id="licenseCode" autocomplete="off" spellcheck="false" placeholder="从桌面端授权窗口复制"></textarea></label>
+        <button class="main-action" id="licenseButton" type="button">检查授权</button>
+        <div class="notice" id="licenseNotice" role="status" aria-live="polite" hidden></div>
+      </section>
+      <div class="result-stack" id="licenseResult"></div>
+    </section>
+
+    <section class="view" data-view="more" aria-labelledby="more-title" hidden>
+      <div class="page-title"><p class="eyebrow">SETTINGS</p><h1 id="more-title">更多</h1><p>安装、桌面端下载与本机数据管理。</p></div>
+
+      <section class="panel list-panel">
+        <a class="list-row" href="../"><span><strong>下载桌面完整版</strong><small>批量打标、邮件投递与完整记录</small></span><b>›</b></a>
+        <button class="list-row" id="installRow" type="button"><span><strong>添加到手机桌面</strong><small id="installRowHint">使用浏览器的“添加到主屏幕”</small></span><b>›</b></button>
+        <button class="list-row danger" id="clearRecords" type="button"><span><strong>清除本机分发记录</strong><small>不会删除电脑上的原始记录</small></span><b>›</b></button>
+      </section>
+
+      <section class="panel prose">
+        <h2>隐私说明</h2>
+        <p>RED 解析、图片水印读取、QQ 与核验密钥计算均在当前设备完成。授权检查只下载官网公开且带签名的授权状态文件。</p>
+        <p>手机浏览器不是系统安全凭据库，因此本版不会保存授权码、SMTP 授权码或核验密钥。</p>
+      </section>
+    </section>
+  </main>
+
+  <nav class="tabbar" aria-label="主要功能">
+    <a class="active" href="#home" data-tab="home"><span aria-hidden="true">⌂</span><small>首页</small></a>
+    <a href="#verify" data-tab="verify"><span aria-hidden="true">◎</span><small>查标</small></a>
+    <a href="#history" data-tab="history"><span aria-hidden="true">≡</span><small>历史</small></a>
+    <a href="#license" data-tab="license"><span aria-hidden="true">◇</span><small>授权</small></a>
+    <a href="#more" data-tab="more"><span aria-hidden="true">•••</span><small>更多</small></a>
+  </nav>
+
+  <input id="recordInput" type="file" accept=".json,application/json" multiple hidden>
+  <dialog id="installDialog">
+    <div class="dialog-head"><strong>添加到手机桌面</strong><button type="button" data-close-dialog>×</button></div>
+    <ol id="installSteps"></ol>
+    <button class="main-action" type="button" data-close-dialog>知道了</button>
+  </dialog>
+
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>
