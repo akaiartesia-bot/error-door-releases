@@ -1,8 +1,9 @@
 {
-  "format": "ERROR-DOOR-AUTH-STATE-1",
-  "revision": 1,
-  "issued_at": "2026-09-27T10:23:14+00:00",
+  "format": "ERROR-DOOR-AUTH-STATE-2",
+  "revision": 2,
+  "issued_at": "2026-09-30T09:31:25+00:00",
   "revoked_license_ids": [],
   "revoked_machine_hashes": [],
-  "signature": "Yd3GBLwIXO30o3ISACUx__tjeNKT7B0w7evilXZ08MyzX4cix7p2v0uj7JMClP0mf9QpMNy7YpLKStdfgifau7HotznkH7w8SD4mtMi9p_AlLw8fn_Z1Z9yF5J3Rf5_z2awgiXLj0kCuj26mMXjOeTEqR5s-wLw8s2hv7QjXzy0FBMRSftVh1c3mb8jL1UCqa9jsDdgLtrsUdu_XIJ2j0KhbGiqK3BaGEmeny_ythLi7JzduSiTunkZZ1edYo40sISg1Wp-Pv4y2_8hKRTHnjpYv6EZm8m6u1Lc7lOjeoKXUBkeKC8B9htJZMy88uSzPTGUaQRzgy4ok3ZUGpKF6-A"
+  "minimum_client_version": "5.15",
+  "signature": "STHsDI3GJqneyu4e4hQTshu_-J8LHWfTSa4PcKiCwl8dGROClnMWS0PvSvoUNbAjraSpOrEkdZExcjO1eqRru8IIyzD00U7bCCKbFHw-WI9ybD5O6fKRE1WqqxQ4pqFo0vgo-CJaiS7p3u2L9VOTT8w1dtmwdHsRzyKyTLF4j3hX3nstI3pEpuWilSd6YlLrAx1qBAJxkyyKMQJMhtIbUiq22iwlxatS8l-Petu51HfRMANAOHezgD2S-Q2Pl-uLVUYmWOw4Ki56ZlbK0-_Z7M4o-dWxXkhsRKg3TFR999LHaSgHTTk3LDdB65PNfpKCisx3LevQ1sF0dupswQtlaA"
 }
