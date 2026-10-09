@@ -3,6 +3,9 @@ const td = new TextDecoder();
 const RED_KEY_TEXT = "reeden-resource-container-v1" + "reeden-private-red-bundle" + "not-a-user-password-boundary";
 const PNG_SIGNATURE = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
 const WATERMARK_START_PIXEL = 1000;
+const SCATTER_WATERMARK_MAGIC = [0x45, 0x44, 0x34, 0x01];
+const SCATTER_WATERMARK_HEADER_BYTES = 30;
+const SCATTER_WATERMARK_REGION_PIXELS = 8192;
 const PBKDF2_ITERATIONS = 200_000;
 const LICENSE_PUBLIC_SPKI = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAszc8mgK9xNCDZqiErOURtOhOjpNwUB5stMlYjJKVIeaTVv8LZjU0XpuBLqtUHvdAJvxmL7hMYMYubHxaPmJOBBA52i7t0Q6wYHPc07EAZaO4SolhmHY63GzNuifmgMCiNCjgOvkX6o+gsRUJ5FXQmEqzWEcTx/dJz4fTdzruZ3C0o/blSRvvygejfajK2uuaTNgtlMjB3e7vIfi11qeLpOdFFHABweeRlg25vX0ZtZkIhfvE4rz60Em/T5Qw/cpDtqWWpsK1zq6rjWlI46QB7306avhKO54WEw8SWhMzZ0K3q2mbpct+yk1rLIS7f18SH+ueDp2QRdyTeHewi8NbOQIDAQAB";
 
@@ -45,6 +48,12 @@ function concat(parts) {
   const output = new Uint8Array(parts.reduce((total, part) => total + part.length, 0));
   let offset = 0;
   for (const part of parts) { output.set(part, offset); offset += part.length; }
+  return output;
+}
+
+function u32be(value) {
+  const output = new Uint8Array(4);
+  new DataView(output.buffer).setUint32(0, value >>> 0, false);
   return output;
 }
 
@@ -184,11 +193,89 @@ async function canvasFromPng(bytes) {
   return canvas;
 }
 
-export async function extractImageWatermark(bytes) {
+function scatterPositions(seed, count, limit, excluded = []) {
+  if (limit - excluded.length < count) throw new Error("图片尺寸不足以读取分散水印");
+  let state = new DataView(seed.buffer, seed.byteOffset, seed.byteLength).getUint32(0, false) || 0x6d2b79f5;
+  const used = new Set(excluded);
+  const positions = [];
+  while (positions.length < count) {
+    state ^= (state << 13) >>> 0;
+    state ^= state >>> 17;
+    state ^= (state << 5) >>> 0;
+    state >>>= 0;
+    const candidate = state % limit;
+    if (used.has(candidate)) continue;
+    used.add(candidate);
+    positions.push(candidate);
+  }
+  return positions;
+}
+
+function readScatterSlots(data, slots) {
+  const output = new Uint8Array(Math.ceil(slots.length / 8));
+  slots.forEach((slot, bitIndex) => {
+    const pixel = Math.floor(slot / 3);
+    const channel = slot % 3;
+    output[bitIndex >> 3] |= (data[pixel * 4 + channel] & 1) << (7 - (bitIndex & 7));
+  });
+  return output;
+}
+
+async function scatterImageSeed(data, width, height, resourcePath) {
+  const targetPixels = Math.min(width * height, SCATTER_WATERMARK_REGION_PIXELS);
+  const regionRows = Math.min(height, Math.max(1, Math.ceil(targetPixels / width)));
+  const normalized = new Uint8Array(data.slice(0, regionRows * width * 4));
+  for (let offset = 0; offset < normalized.length; offset += 4) {
+    normalized[offset] &= 0xfe;
+    normalized[offset + 1] &= 0xfe;
+    normalized[offset + 2] &= 0xfe;
+  }
+  const context = te.encode(String(resourcePath || "").replace(/\\/g, "/"));
+  const seed = await sha256(concat([
+    te.encode("ED4/image"), u32be(width), u32be(height), u32be(context.length), context, normalized,
+  ]));
+  return { seed, regionRows };
+}
+
+function recognizedWatermarkToken(raw) {
+  const offline = raw.length === 36 && raw[0] === 0x45 && raw[1] === 0x57 && raw[2] === 0x33 && raw[3] === 0x01;
+  const legacy = raw.length >= 36 && raw.length <= 96 && raw[0] === 0x45 && raw[1] === 0x57 && raw[2] === 0x32 && raw[3] === 0x01;
+  return offline ? "offline" : legacy ? "legacy-online" : null;
+}
+
+async function extractScatteredWatermark(data, width, height, resourcePath) {
+  const { seed: imageSeed, regionRows } = await scatterImageSeed(data, width, height, resourcePath);
+  const limit = width * regionRows * 3;
+  const locatorSeed = await sha256(concat([te.encode("ED4/locator"), imageSeed]));
+  const locatorSlots = scatterPositions(locatorSeed, SCATTER_WATERMARK_HEADER_BYTES * 8, limit);
+  const header = readScatterSlots(data, locatorSlots);
+  if (!SCATTER_WATERMARK_MAGIC.every((value, index) => header[index] === value)) return null;
+  const nonce = header.slice(4, 20);
+  const payloadLength = (header[20] << 8) | header[21];
+  const payloadHash = header.slice(22, 30);
+  if (payloadLength < 40 || payloadLength > 100) return null;
+  const bodySeed = await sha256(concat([te.encode("ED4/body"), imageSeed, nonce, payloadHash]));
+  const bodySlots = scatterPositions(bodySeed, payloadLength * 8, limit, locatorSlots);
+  const payload = readScatterSlots(data, bodySlots);
+  const actualHash = await sha256(payload);
+  if (!payloadHash.every((value, index) => actualHash[index] === value)) return null;
+  if (payload[0] !== 0x45 || payload[1] !== 0x57) return null;
+  const rawLength = (payload[2] << 8) | payload[3];
+  const raw = payload.slice(4);
+  if (rawLength !== raw.length) return null;
+  const mode = recognizedWatermarkToken(raw);
+  return mode ? { type: "token", token: bytesToBase64url(raw), mode: `scattered-v4:${mode}` } : null;
+}
+
+export async function extractImageWatermark(bytes, resourcePath = "") {
   const canvas = await canvasFromPng(bytes);
   const pixels = canvas.width * canvas.height;
-  if (pixels <= WATERMARK_START_PIXEL) return null;
   const data = canvas.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, canvas.width, canvas.height).data;
+  try {
+    const scattered = await extractScatteredWatermark(data, canvas.width, canvas.height, resourcePath);
+    if (scattered) return scattered;
+  } catch { /* Continue with the fixed-position compatibility reader. */ }
+  if (pixels <= WATERMARK_START_PIXEL) return null;
   const read = count => {
     const output = new Uint8Array(count);
     let bitIndex = 0;
@@ -210,9 +297,8 @@ export async function extractImageWatermark(bytes) {
   }
   if (prefix === "EW" && length >= 36 && length <= 96) {
     const raw = read(4 + length).subarray(4);
-    const offline = raw.length === 36 && raw[0] === 0x45 && raw[1] === 0x57 && raw[2] === 0x33 && raw[3] === 0x01;
-    const legacy = raw.length >= 36 && raw[0] === 0x45 && raw[1] === 0x57 && raw[2] === 0x32 && raw[3] === 0x01;
-    if (offline || legacy) return { type: "token", token: bytesToBase64url(raw), mode: offline ? "offline" : "legacy-online" };
+    const mode = recognizedWatermarkToken(raw);
+    if (mode) return { type: "token", token: bytesToBase64url(raw), mode };
   }
   return null;
 }

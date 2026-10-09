@@ -1,4 +1,4 @@
-const CACHE = "error-door-mobile-v3";
+const CACHE = "error-door-mobile-v4";
 const APP_SHELL = ["./", "./index.html", "./app.css", "./app.mjs", "./core.mjs", "./manifest.webmanifest", "./icon.svg", "./apple-touch-icon.png", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", event => {

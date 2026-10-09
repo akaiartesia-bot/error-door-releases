@@ -170,7 +170,7 @@ async function verifySelectedRed() {
     for (let index = 0; index < pngEntries.length; index += 1) {
       const entry = pngEntries[index];
       try {
-        const mark = await extractImageWatermark(entry.data);
+        const mark = await extractImageWatermark(entry.data, entry.path);
         if (mark) hits.push({ mark, path: entry.path, category: watermarkCategory(entry.path) });
       } catch { /* A damaged or unsupported image does not stop the remaining scan. */ }
       if (index % 3 === 0) {
