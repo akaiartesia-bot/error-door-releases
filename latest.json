@@ -1,14 +1,14 @@
 {
   "manifest_version": 1,
-  "version": "5.15.13",
+  "version": "5.15.14",
   "download_url": "https://errordoor.site/",
-  "notes": "修复部分 Windows 机器上邮件发送确认框隐藏后造成界面无法操作的问题；加密附件直接发送，未加密附件使用页面内二次确认，自动删除选项与发送结果均在邮件页内明确显示。",
-  "package_url_macos": "https://github.com/akaiartesia-bot/error-door-releases/releases/download/v5.15.13/error-door-v5.15.13-macOS-x64.zip",
-  "package_sha256_macos": "b32da83a610ae99fe3afd4a2c335ad20997a6d1ba649016785edeebc150d401c",
-  "package_size_macos": 9096756,
-  "signature": "DU792WyBhqJC1RLO1Yfyd5Y_HcPSR9OWu-LgFrmu2uIckrvFTNHegmOAwpt-FKNndbTwkTy26Yo7I6gUrL0CjPRMZJe9WoRrm9RO9uXSvDLXMyXKvo1QdbL86yGzwbD_mqFl7kJowKyokZOxb6TYQVQZeRYU6Q6ajWxYtZ4LYwdyPb9BruDWnza3P5Rd--rEqZvuN-yaX4mXkjcizelBEQDKmQsnDgYcz77SSarfLGtusPFNtt8LWei6dLzqMLfUKNlqS6Y3kwuk2QerBTLhkWYE7VRdx2zIVB9ljM9TCoORMe8vFpRkcE8-H6dBCbkjWe0mB51zZi_CO4kDAE38RQ",
-  "package_url_windows": "https://github.com/akaiartesia-bot/error-door-releases/releases/download/v5.15.13/error-door-v5.15.13-windows-x64.zip",
-  "package_sha256_windows": "12cbcff98805aed9c0104fb5a2bc855e2bf9919321a8c2017d2b9030fff6720f",
-  "package_size_windows": 12674995,
-  "signature_windows": "OB_PL9entcQAqk34LjnQig2Equ-t09DZ-1tRs2mBPJgwlI_xG0O-XCbgtJ6x7kI3Blrq7EQgIfKIXLhqWtBL76YzBuTD5Orse77KTE6TdF74a64BeS4wFe4rGXVP9iDH9eRzAOtNBaPcVIrUZY6fmbWlNHUsVxHVZypXzTsh5OBfTeqMvhw10_R6QdaiDP2yWsDt-cBXIXCbRxSBvzSAeZoY_AfhijKUYsa51cSJJ8S35RV-5wDlBs4ZTBowyCjZicrlL3564jcTrS-gCqC6u-keLwAKT0yQU6bG0nC34HBiZbzXZn3cQKa_-1cgryaMsqAYcwBPAYPthPoYb2wTNg"
+  "notes": "优化左侧导航外观：移除整块选中框和 Windows 按钮焦点边框，改为细窄指示线与文字、图标强调，同时保留可靠点击和键盘快捷键。",
+  "package_url_macos": "https://github.com/akaiartesia-bot/error-door-releases/releases/download/v5.15.14/error-door-v5.15.14-macOS-x64.zip",
+  "package_sha256_macos": "f9ddf9050005e87ecf0e6d079583058c8b302d3504c7e5db73ad125ef7f3fd5d",
+  "package_size_macos": 9095425,
+  "signature": "r1oBy_Hi65X4SrMDSNHnuxlzM2ckySZKz5sr1qY7eqdQE06s2tdYUV_LIuV3KFiijwRwesmYu4CFSmso3Q94gxYLfFyTc64qBi8b80hmXa4FwkJbn13qNObIknoRio8oyCrkvhkqZHX94L9mghVQ2YCH-XJclLZR_OGxumsWyEE-7tbqZPv2zNtfYT9O_nRp8jAgkkdCMJOR_0zwUiqQ5RDhz1RGzBj06KB9BsDD_T3sSCH8UT8Oxdy-LKw0_KGr2-17SGxJTVqBEneGlGy5pTJh1V5Q7vc_1Icar26p7pgWl_NIYcKc8J45617XXNQUogqal-R5sAM9Ln3F8Ifd1w",
+  "package_url_windows": "https://github.com/akaiartesia-bot/error-door-releases/releases/download/v5.15.14/error-door-v5.15.14-windows-x64.zip",
+  "package_sha256_windows": "a03a7e25e1e2dd79c8d3aa96d9a65d04623fb2e1b648a481b4378b4cf0acd634",
+  "package_size_windows": 12674380,
+  "signature_windows": "AEMaHBcksPSfXdHGbo0iToN5Hy5EpSvNFvwyjwgHU_5iyQ3WcYBXtBpF2S9k5gnAOdb1PZqa1qPWYnsbZQptWbIqGr7IahcV_X7S8JDS7o0bJsSE5g4qo_6lcBkFp63dDXs8Ny9ttcmEQgDylg5QW6P6P7V1hoRLDzb3kIIBFt8ZRu-25TI4Nl3Ya55yk_i8mNQLwIyqFFy8oRUjtDvE70BK-RQ7bZdXrweeo-FDdTqxxPaxntHN0qB0rBYznbOjvqF09huDxiZkFp8fNXKxQmbOom8CMesHLN1NztyJdUv9bNo4gfPlX6Yblwu__dPyiwVOpmxw9NhGoVrE2b8mPA"
 }
