@@ -2,8 +2,8 @@
 
 这里仅发布“错误的门”的签名安装包与更新清单，不包含程序源码、授权签名私钥、邮箱配置或分发记录。
 
-- Windows 10/11 x64：在 [v5.15.17 发布页](https://github.com/akaiartesia-bot/error-door-releases/releases/tag/v5.15.17) 下载 `error-door-v5.15.17-windows-x64.zip`，完整解压后进入“错误的门-v5.15.17”文件夹运行“错误的门.exe”。
-- macOS Intel / Apple 芯片（Rosetta）：下载 `error-door-v5.15.17-macOS-x64.zip`，解压后将 App 放入“应用程序”。首次打开请右键 App，选择“打开”。
+- Windows 10/11 x64：在 [v5.15.18 发布页](https://github.com/akaiartesia-bot/error-door-releases/releases/tag/v5.15.18) 下载 `error-door-v5.15.18-windows-x64.zip`，完整解压后进入“错误的门-v5.15.18”文件夹运行“错误的门.exe”。
+- macOS Intel / Apple 芯片（Rosetta）：下载 `error-door-v5.15.18-macOS-x64.zip`，解压后将 App 放入“应用程序”。首次打开请右键 App，选择“打开”。
 - 手机伴侣：打开 [errordoor.site/mobile/](https://errordoor.site/mobile/)，可在本机核验 RED、导入分发记录查询历史并检查授权状态。
 
 官方网站与授权说明：[errordoor.site](https://errordoor.site/)
