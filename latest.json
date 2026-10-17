@@ -1,14 +1,14 @@
 {
   "manifest_version": 1,
-  "version": "5.15.18",
+  "version": "5.15.20",
   "download_url": "https://errordoor.site/",
-  "notes": "完全移除会干扰 Windows 页面控件的全局鼠标释放监听；左侧导航只响应导航行自身事件。",
-  "package_url_macos": "https://github.com/akaiartesia-bot/error-door-releases/releases/download/v5.15.18/error-door-v5.15.18-macOS-x64.zip",
-  "package_sha256_macos": "d70cec3e4007262ad3bf270a4321ae64c0adb5293105c5abd78fadeaaafa2ffc",
-  "package_size_macos": 9095773,
-  "signature": "qS6sl75MyAzrNyGGsIXOfk04aDPHr765CNyi23mggV8I9iWJ9B6GJZW_q0UojTvPoGi5nZnLuGJBT3YJqgAeUJVihPYY_uEmg3VXbbH0XCiuw9E5F0rm9BwD-18LFiVz9aeDvhW9Q7m-TDsNw-APXa2k7UlXd13A5reKgzYnf-NfuPW5prtD_fCTx7GgsVBiaFvLPWUoPztaS4t_3mO4A6NK3OOuJ0J21NiMLYrI7oyrIE8wKYP2GzMRqDDhpUyHg9CBEvK2Dsba-qK528Wql-VDXJM4gY6yhk_WCiX7pfezHcwqD2ZIoQAWa0sQDeVHMNYoShwVhhXpEnpxEaaTCw",
-  "package_url_windows": "https://github.com/akaiartesia-bot/error-door-releases/releases/download/v5.15.18/error-door-v5.15.18-windows-x64.zip",
-  "package_sha256_windows": "9b37687e3509dfbe02eadcc552793b08a6db77c95f51a10e3617f9c4ee7d0c13",
-  "package_size_windows": 12675324,
-  "signature_windows": "NBzMzPNbvD_TJww56-RzkX1L3uFoLttcIeCv-ApGjZZPJTozgty_PT9ykunbhMunjE-m4cqcsvx-oRN6LNUpKzumH06YG_VK5H1hAYkQdJ78ILRpVZn5P-upnPW4qLudMns1u2mCkOMCbAs1nJGSauXe1eWmYxflCZfoQ7Zv-rmZV0k7vPjcqqU9dxUXdS6k89hrNdh76YDLqrfRDaeYe1h1TtPlLZCcpmfj4xvFo8-SQRdgqzfdQJ2VStFkzD8h2hvIErAtiO21tSvwnauf9EY5ovwaOhUXKboaN-NqopLsM_DZhXrrLHqVK-p-B3xh40xDa8-bdPfElrQyG1mYZQ"
+  "notes": "修复部分 Windows 环境输入 QQ、端口、授权码或正文数字时误触页面导航的问题；页面切换仅由左侧按钮触发。",
+  "package_url_macos": "https://github.com/akaiartesia-bot/error-door-releases/releases/download/v5.15.20/error-door-v5.15.20-macOS-x64.zip",
+  "package_sha256_macos": "e15d47e3d523db9d4e770ddb2266f78e5a8463dd5afb2dd6c5cf34e77366bd47",
+  "package_size_macos": 9095523,
+  "signature": "FJvMzEfeXrgAIKBepkcCKOH_BcNM0RF28mQngqqQcoU6FAS-tWQ4AH87cIXkxya0paUxPttsFdZYu3Rgp-k-3YUSK4X1bseVTcxY04R2CbY4X6BVFz-9c4vquyRUHTFVeJ8d1xgXK24lvolFf0Od60KhvEePdHZ4NJvWrts0-3NOUMq7yfamIhRX6lgwnv8BXZdHv5KZgAeqPeYEm3TivETz4plsaML0rGGGPM3q-_Q3CFuxq6FTg-Waa3BgNlJ_vcR68Q0OSz7zGRM9vvcQ04TQYt7__UBsichSmVhXGnllVNk1I_nWH2U0vnw1VCzSLBXr2xViigMbS6t8Hzd6gw",
+  "package_url_windows": "https://github.com/akaiartesia-bot/error-door-releases/releases/download/v5.15.20/error-door-v5.15.20-windows-x64.zip",
+  "package_sha256_windows": "d52345130d8f137951d175cf7f0a5c54475f5615f12ef9837547ba9905356644",
+  "package_size_windows": 12673988,
+  "signature_windows": "X8cbYdsP26b-vl0-4Im8wjMwD_9PipF6780hnDDAH8KyhDdx0xpwLOoUbRz257JAAYUaU1K-GV_of74CIOHKzJLHoft_iNLDpPXueBFdcNaiYLd4FpATdCTHxCMWtrXBL8La_cgUA7YSrYJ4HkC5y9ggWzZyK2T8BT080t9-ZxL8rNZzBNIk1dSkyfvZJOixVkoAdsv2CPCptP7jzzAIESmlCRhLTOp3VR9872VOPpMlGjK2YkGvb3DJXM_8TzEOiGCiQ-9iWrW8aXxKUNxxbw_Iv8kSbgqa8M3hdb3mE8HiHThgyYg9RAiMge-A7977njWlgFjT6cPQaMOtkeN6_g"
 }
